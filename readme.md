@@ -9,7 +9,6 @@ Let me tell you upfront about the hassles with my offering:
 - requires a bit of a setup if youre new to python development. it's not too hard but there's a bit of it. i will try to explain.
 - you will have to write image descriptions in the json mines
 - you will have to run a few commands each time to update file knowledge + generate html
-- you have to incidentally host the script, or change build directory, because i set the default for my specific use case (y)(a)
 - binga bonga bing
 
 In return, how about:
@@ -19,7 +18,7 @@ In return, how about:
 - extendable versioned json "database" with metadata, where human changes are persisted
   - easy to extend with python
   - possible to extend with external tools
-  - "schema" key definition take lambdas for values - `"md5": lambda current, old: current.get("md5")`
+  - "schema" key definition take lambdas for values - `"md5": lambda context, old_state: context.get("md5")`
     - this makes a library rescan automatically populate these fields retroactively
     - immediately usable in the templates for the entire library
 - permissive license. who give a shit.
@@ -35,7 +34,7 @@ Rember i love you ^.^
 
 True as of 2025-06-07.
 
-First step is clone this with git to your computer. This looks like `$ git clone https://git.awblawdl bla bla`.
+First step is clone this with git to your computer. This looks like `$ git clone https://github.com/free-ghz/static-image-gallery.git`.
 
 Github gives you the right command from the clone button up there ↖️⬆️↗️ idk where it is
 
@@ -106,15 +105,16 @@ When you are satisfied with the state of your json file, it's time to generate t
 $ pdm run html
 ```
 
-This uses the jinja template in `templates/index.html` to completely overwrite the `index.html` in the project root.
+This uses the jinja template in `templates/index.html` to generate a gallery file. It and all its requirements are copied into the `public/` folder.
 
-Now you can host the entire dang project and it will just work. It will also expose a bunch of build artifacts but that's your problem. I know it's unfortunate and i am working on some way of solving this.
-
+Copy the contents of this folder onto your webhost or whatever.
 
 
 ## Gallery design
 
 A templating engine called _jinja2_ is used to generate the html from a _template_, in our case `templates/index.html`. This is basically a regular html file, but with some special commands that allow you to access the metadata of an image or series (these concepts are discussed above). By building this file to be an example of a single image in a single series, the `pdm run html` step repeats that example using the metadata from the latest json file in `states/`.
+
+Anything in `templates/` but index.html will be copied into `public/` on site generation. This should make it _fairly_ convenient to build your html design there. 
 
 ## Adding new metadata types
 
@@ -134,7 +134,8 @@ IMAGE_SCHEMA = {
     "tags": lambda context, old_metadata: old_metadata.get("tags", []) if old_metadata else [],
     
     # Grab the width from the Image object directly, as the context exposes it
-    "width": lambda context, old_metadata: current.img.width,
+    "width": lambda context, old_metadata: context.img.width,
+}
 ```
 
 Now, as soon as i run `$pdm run scan`, the `width` is added to the metadata json for each image in the library. It is now visible in the template. 
@@ -157,7 +158,7 @@ Scans the `wallpapers/` folder for new or changed images. Also repopulates old i
 
 ### - `pdm run html`
 
-Uses the latest json in `states/` to generate a html site.
+Uses the latest json in `states/` to generate a html site in `public/`.
 
 ### - `pdm run rescan`
 

@@ -17,6 +17,8 @@ THUMBS_DIR = "thumbs"
 TEMPLATES_DIR = "templates"
 THUMB_SIZE = (400, 400)
 SUPPORTED_EXTENSIONS = ('.jpg', '.jpeg', '.png')
+OUTPUT_DIR = "public"
+OUTPUT_HTML_FILE = os.path.join(OUTPUT_DIR, "index.html")
 
 
 
