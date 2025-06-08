@@ -1,0 +1,26 @@
+# input to, and output of, the generator.
+# this means you could update the code with `git pull` without affecting your wallpapers, "database", or generated files.
+# this strategy lets you use the same code for different galleries.
+wallpapers
+thumbs
+states
+/index.html
+
+# python
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+
+# virtual environment
+.venv/
+venv/
+
+# pdm specific files
+.pdm-python
+.pdm.toml
+pdm.lock
+
+# jetbrains noise
+.idea

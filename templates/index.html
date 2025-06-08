@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gallery</title>
+</head>
+<body>
+<main>
+    <div class="top">Gallery blablalba</div>
+    <div class="demoreel">
+        {# 'gallery_data' is the variable we will pass from python. this is a Jinja2 comment btw #}
+        {% for series in gallery_data %}
+        <div class="persent">
+            <h3>{{ series.title }}</h3>
+            {% for image in series.images %}
+            <a href="wallpapers/{{ series.title }}/{{ image.name }}">
+                <img src="thumbs/{{ image.md5 }}.jpg" alt="{{ image.name }}" />
+            </a>
+            {% endfor %}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="tail">Meow</div>
+</main>
+</body>
+</html>

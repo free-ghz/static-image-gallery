@@ -1,0 +1,30 @@
+[project]
+name = "static-image-gallery"
+version = "0.1.0"
+description = "scripts to manage a static image gallery."
+authors = [
+    {name = "sixeyes", email = "elmusho@gmail.com"},
+]
+dependencies = [
+    "pillow>=11.2.1",  # for image processing (thumbnails)
+    "jinja2>=3.1.6",   # for html templating
+]
+requires-python = ">=3.13"
+
+[project.optional-dependencies]
+dev = [
+    "mypy>=1.16.0",
+]
+[tool.setuptools.packages.find]
+where = ["src"]  # tell setuptools our code is in the 'src' directory
+
+# if you want to run these outside of these script definitions,
+# assume these all are prefixed with `pdm run `.
+[tool.pdm]
+[tool.pdm.scripts]
+scan = "python src/update_gallery.py"
+html = "python src/generate_html.py"
+
+# for development
+rescan = "python src/rescan.py"
+lint = "mypy src"
