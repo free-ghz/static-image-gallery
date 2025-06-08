@@ -3,24 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <title>Gallery</title>
+    <style>
+        @font-face {
+            font-family: 'vcr_osd_mono';
+            src: url('vcr_osd_mono.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            background: url("sky.png");
+            background-attachment: fixed;
+            color: #ff0;
+            font-family: vcr_osd_mono, 'Courier New', Courier, monospace;
+            font-size: 24px;
+        }
+
+        .everything {
+            width: 800px;
+            position: relative;
+            margin: 140px auto;
+        }
+        .housie {
+            width: 271px;
+            height: 271px;
+            background-image: url("housie.png");
+            position: absolute;
+            left: -120px;
+            top: -120px;
+            z-index:-100;
+            transform: rotate(180deg);
+        }
+
+        h1, h2, h3 {
+            margin-top: 0;
+            padding-top: 0;
+        }
+        .top {
+            font-style: italic;
+            text-decoration: underline;
+        }
+        .demoreel {
+            display: flex;
+            flex-direction: column;
+            gap: 2em;
+        }
+        .series {
+            border:#efe 0.4em ridge;
+            backdrop-filter: blur(10px);
+            padding:0.5em;
+            z-index: 100;
+            border-radius: 4px;
+            overflow: visible;
+        }
+        .images {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+        }
+        .image {
+            background-image: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='58' height='66.981' patternTransform='scale(1) rotate(20)'><rect x='0' y='0' width='100%' height='100%' fill='%2322222200'/><path d='M57.994 92.097l-14.498-8.37.002-16.745 14.5-8.373 14.498 8.37-.002 16.745zm-58 0l-14.498-8.37.002-16.745 14.5-8.374 14.498 8.37-.002 16.745zM29.002 8.372L14.504.002l.002-16.745 14.5-8.373 14.498 8.37-.002 16.744zm29 16.748l-14.498-8.37.002-16.745 14.5-8.373L72.504.002l-.002 16.744zm-58 0l-14.498-8.37.002-16.745 14.5-8.374L14.504.001l-.002 16.745zm57.996 33.489L43.5 50.239l.002-16.745 14.5-8.374L72.5 33.49l-.002 16.745zm-29.004 16.74l-14.498-8.37.002-16.744 14.5-8.374 14.498 8.37-.002 16.745zm.004-33.488L14.5 33.49l.002-16.745 14.5-8.374 14.498 8.37-.002 16.745zm-29 16.747l-14.498-8.37.002-16.744 14.5-8.374L14.5 33.49l-.002 16.745z'  stroke-width='1' stroke='none' fill='%23222222ff'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,0)' fill='url(%23a)'/></svg>");
+            max-width: 245px;
+            border: #222 solid 4px;
+        }
+        .image:hover {
+            background-image: url("data:image/svg+xml,<svg id='patternId' width='100%' height='100%' xmlns='http://www.w3.org/2000/svg'><defs><pattern id='a' patternUnits='userSpaceOnUse' width='58' height='66.981' patternTransform='scale(1) rotate(20)'><rect x='0' y='0' width='100%' height='100%' fill='%2322222200'/><path d='M57.994 92.097l-14.498-8.37.002-16.745 14.5-8.373 14.498 8.37-.002 16.745zm-58 0l-14.498-8.37.002-16.745 14.5-8.374 14.498 8.37-.002 16.745zM29.002 8.372L14.504.002l.002-16.745 14.5-8.373 14.498 8.37-.002 16.744zm29 16.748l-14.498-8.37.002-16.745 14.5-8.373L72.504.002l-.002 16.744zm-58 0l-14.498-8.37.002-16.745 14.5-8.374L14.504.001l-.002 16.745zm57.996 33.489L43.5 50.239l.002-16.745 14.5-8.374L72.5 33.49l-.002 16.745zm-29.004 16.74l-14.498-8.37.002-16.744 14.5-8.374 14.498 8.37-.002 16.745zm.004-33.488L14.5 33.49l.002-16.745 14.5-8.374 14.498 8.37-.002 16.745zm-29 16.747l-14.498-8.37.002-16.744 14.5-8.374L14.5 33.49l-.002 16.745z'  stroke-width='1' stroke='none' fill='%23000000ff'/></pattern></defs><rect width='800%' height='800%' transform='translate(0,0)' fill='url(%23a)'/></svg>");
+            border: #000 solid 4px;
+        }
+        .images img {
+            max-width: 100%;
+            display: block;
+        }
+        .taghosttube {
+            display: grid;
+            grid-template-columns: 1fr;
+            justify-content: space-between;
+            gap:0.3em;
+            font-size: 0.55em;
+            justify-items: start;
+        }
+        .tag {
+            padding:3px;
+            background-color: #444;
+            border-radius: 5px;
+            backdrop-filter: blur(10px);
+            overflow: hidden;
+            text-align: center;
+            max-width: 230px;
+        }
+        a.image:link {
+            text-decoration: none;
+        }
+        a:link .heart, a:visited .heart, a:active .heart {
+            color:#ccc;
+            text-decoration: none;
+        }
+        a:hover .heart {
+            color:#eee;
+            text-decoration: none;
+        }
+        a:link .heart .tag, a:visited .heart .tag, a:active .heart .tag {
+            color:#eee;
+        }
+        a:hover .heart .tag {
+            color:#fee;
+            overflow: visible;
+            text-shadow: 
+                #444 1px 1px 0,
+                #444 -1px 1px 0,
+                #444 -1px -1px 0,
+                #444 1px -1px 0
+                ;
+        }
+        .heart {
+            display: flex;
+            flex-direction: column;
+            gap:0.165em;
+            background-color: #222;
+            padding-bottom:4px;
+            margin-bottom:-4px;
+        }
+        .image:hover .heart {
+            background-color: #000;
+        }
+    </style>
 </head>
 <body>
 <main>
-    <div class="top">Gallery blablalba</div>
-    <div class="demoreel">
-        {# 'gallery_data' is the variable we will pass from python. this is a Jinja2 comment btw #}
-        {% for series in gallery_data %}
-        <div class="persent">
-            <h3>{{ series.title }}</h3>
-            {% for image in series.images %}
-            <a href="wallpapers/{{ series.title }}/{{ image.name }}">
-                <img src="thumbs/{{ image.md5 }}.jpg" alt="{{ image.name }}" />
-            </a>
+    <div class="everything">
+        <div class="housie"></div>
+        <div class="top">Gallery blablalba</div>
+        <div class="demoreel">
+            {# 'gallery_data' is the variable we will pass from python. this is a Jinja2 comment btw #}
+            {% for series in gallery_data %}
+            <div class="series">
+                <h3>{{ series.name }}</h3>
+                <div class="images">
+                    {% for image in series.images %}
+                        <a href="wallpapers/{{ series.name }}/{{ image.name }}" class="image">
+                            <div class="heart">
+                                <img src="thumbs/{{ image.md5 }}.jpg" alt="{{ image.name }}" />
+                                <div class="taghosttube">
+                                    <div class="tag">{{ image.name }}</div>
+                                    <div class="tag">{{ image.width }}☓{{ image.height }}</div>
+                                {% if image.comments != "" %}
+                                <div>
+                                    {{ image.comments }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
             {% endfor %}
         </div>
-        {% endfor %}
+        <div class="tail">Meow</div>
     </div>
-    <div class="tail">Meow</div>
 </main>
 </body>
 </html>

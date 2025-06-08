@@ -2,7 +2,9 @@
 
 Min lilla galleri static site generator.
 
-I have randomly produced a few "wallpaper" worthy images every now and then in whichever way, but i never knew what to do with them. Blah blah this is a static gallery generator that is meant to be very minimal but also easy to extend for whatever little usecase one comes up with. 
+I have randomly produced a few "wallpaper" worthy images every now and then in whichever way, but i never knew what to do with them. Blah blah this is a static gallery generator that is meant to be very minimal but also easy to extend for whatever little usecase one comes up with.
+
+![example](https://raw.githubusercontent.com/free-ghz/static-image-gallery/refs/heads/main/presskit.jpg "example")
 
 Let me tell you upfront about the hassles with my offering:
 
