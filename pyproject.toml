@@ -22,8 +22,8 @@ where = ["src"]  # tell setuptools our code is in the 'src' directory
 # assume these all are prefixed with `pdm run `.
 [tool.pdm]
 [tool.pdm.scripts]
-scan = "python src/update_gallery.py"
-html = "python src/generate_html.py"
+scan = "python src/scan.py"
+html = "python src/html.py"
 
 # for development
 rescan = "python src/rescan.py"
