@@ -3,24 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <title>Gallery</title>
+    <style>
+        body {
+            background: url("sky.png");
+            background-attachment: fixed;
+            color: #ff0;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 24px;
+        }
+
+        .everything {
+            width: 800px;
+            position: relative;
+            margin: 140px auto;
+        }
+        .housie {
+            width: 271px;
+            height: 271px;
+            background-image: url("housie.png");
+            position: absolute;
+            left: -120px;
+            top: -120px;
+            z-index:-100;
+            transform: rotate(180deg);
+        }
+
+        h1, h2, h3 {
+            margin-top: 0;
+            padding-top: 0;
+        }
+        .top {
+            font-style: italic;
+            text-decoration: underline;
+        }
+        .demoreel {
+            display: flex;
+            flex-direction: column;
+            gap: 2em;
+        }
+        .series {
+            border:#ff0 0.4em ridge;
+            backdrop-filter: blur(10px);
+            padding:0.5em;
+            z-index: 100;
+            border-radius: 4px;
+            overflow: visible;
+        }
+        .images {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+        }
+        .image {
+            background-color: #222;
+            padding:4px;
+        }
+        .images img {
+            max-width: 100%;
+            display: block;
+        }
+    </style>
 </head>
 <body>
 <main>
-    <div class="top">Gallery blablalba</div>
-    <div class="demoreel">
-        {# 'gallery_data' is the variable we will pass from python. this is a Jinja2 comment btw #}
-        {% for series in gallery_data %}
-        <div class="persent">
-            <h3>{{ series.title }}</h3>
-            {% for image in series.images %}
-            <a href="wallpapers/{{ series.title }}/{{ image.name }}">
-                <img src="thumbs/{{ image.md5 }}.jpg" alt="{{ image.name }}" />
-            </a>
+    <div class="everything">
+        <div class="housie"></div>
+        <div class="top">Gallery blablalba</div>
+        <div class="demoreel">
+            {# 'gallery_data' is the variable we will pass from python. this is a Jinja2 comment btw #}
+            {% for series in gallery_data %}
+            <div class="series">
+                <h3>{{ series.name }}</h3>
+                <div class="images">
+                    {% for image in series.images %}
+                    <div class="image">
+                        <a href="wallpapers/{{ series.name }}/{{ image.name }}">
+                            <img src="thumbs/{{ image.md5 }}.jpg" alt="{{ image.name }}" />
+                        </a>
+                        {% if image.comments != "" %}
+                        <div>
+                            {{ image.comments }}
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
             {% endfor %}
         </div>
-        {% endfor %}
+        <div class="tail">Meow</div>
     </div>
-    <div class="tail">Meow</div>
 </main>
 </body>
 </html>
