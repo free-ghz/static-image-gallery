@@ -11,6 +11,7 @@ class ImageMetadata(TypedDict):
     tags: List[str]
     width: int
     height: int
+    filesize: str
 
 class ImageSeries(TypedDict):
     name: str
@@ -25,6 +26,7 @@ class ProcessingContext:
     name: str
     md5: str
     img: Image.Image
+    filesize: str
 
 OldMetadata = Optional[Dict[str, Any]]
 SchemaFieldGenerator = Callable[[ProcessingContext, OldMetadata], Any]

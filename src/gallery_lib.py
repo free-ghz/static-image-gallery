@@ -154,13 +154,15 @@ def merge_states(current_scan: ImageLibrary, previous_state: Dict[str, Any]) -> 
             md5 = scanned_image["md5"]
             old_image_data: OldMetadata = previous_images_by_md5.get(md5)
             image_path = os.path.join(current_series_scan["directory"], scanned_image["name"])
+            filesize = os.path.getsize(image_path)
 
             try:
                 with Image.open(image_path) as img:
                     context = ProcessingContext(
                         name=scanned_image["name"],
                         md5=md5,
-                        img=img
+                        img=img,
+                        filesize=filesize
                     )
 
                     new_metadata_dict = {

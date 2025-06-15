@@ -19,4 +19,13 @@ IMAGE_SCHEMA: Dict[str, SchemaFieldGenerator] = {
 
     "width": lambda context, old_metadata: context.img.width,
     "height": lambda context, old_metadata: context.img.height,
+    "filesize": lambda context, old_metadata: format_bytes(context.filesize),
 }
+
+
+def format_bytes(size):
+    for unit in ['B', 'KB', 'MB', 'GB']:
+        if size < 1024.0:
+            return f"{size:.2f} {unit}"
+        size /= 1024.0
+    return f"{size:.2f} TB"

@@ -74,9 +74,10 @@
             display: block;
         }
         .taghosttube {
-            display: grid;
-            grid-template-columns: 1fr;
-            justify-content: space-between;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: start;
             gap:0.3em;
             font-size: 0.55em;
             justify-items: start;
@@ -145,6 +146,8 @@
                                 <div class="taghosttube">
                                     <div class="tag">{{ image.name }}</div>
                                     <div class="tag">{{ image.width }}☓{{ image.height }}</div>
+                                    <div class="tag">{{ image.filesize }}</div>
+                                </div>
                                 {% if image.comments != "" %}
                                 <div>
                                     {{ image.comments }}
